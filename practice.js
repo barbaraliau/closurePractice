@@ -83,8 +83,12 @@ var alertFn = function() {
 
 
 var outerFn = function(otherFn) {
+  var i = true;
   return function() {
-    otherFn();
+    if (i) {
+      otherFn();
+      }
+    i = false;
   };
 };
 
@@ -94,13 +98,12 @@ callFunction();
 ////
 
 var outerFn = function(otherFn, N) {
-  var limit = N;
   return function() {
-    if (limit > 0) {
+    if (N) {
       otherFn();
-      limit--;
+      N--;
     }
-    else if (limit === 0) {
+    else {
       console.log('STAHHP');
     }
   }  
